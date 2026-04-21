@@ -27,5 +27,20 @@ produtos = [
         "novo": False,
         "promocao": None,
         "avaliacoes": []
+    },
+    {
+        "id": 3,
+        "nome": "Cookies de Chocolate",
+        "categoria": "bolacha",
+        "preco": 5.0,
+        "stock": 30,
+        "disponivel": True,
+        "sabores": ["chocolate"],
+        "tamanhos": ["pack"],
+        "cores": ["castanho"],
+        "intolerancias": [],
+        "promocao": None,
+        "novo": False,
+        "avaliacoes": []
     }
 ]
