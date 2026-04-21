@@ -42,5 +42,20 @@ produtos = [
         "promocao": None,
         "novo": False,
         "avaliacoes": []
+    },
+    {
+        "id": 4,
+        "nome": "Donut de Chocolate",
+        "categoria": "donut",
+        "preco": 2.5,
+        "stock": 25,
+        "disponivel": True,
+        "sabores": ["chocolate"],
+        "tamanhos": ["unico"],
+        "cores": ["castanho"],
+        "intolerancias": [],
+        "promocao": None,
+        "novo": True,
+        "avaliacoes": []
     }
 ]
