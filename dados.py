@@ -59,7 +59,7 @@ produtos = [
         "avaliacoes": []
     },
     {
-        "id": 2,
+        "id": 5,
         "nome": "Bolo Red Velvet",
         "categoria": "bolo",
         "preco": 30.0,
@@ -72,5 +72,27 @@ produtos = [
         "promocao": None,
         "novo": True,
         "avaliacoes": []
+    }
+]
+
+encomendas = [
+    {
+    "id": 1,
+    "cliente_nome": "Maria",
+    "email": "maria@email.com",
+    "telefone": "912345678",
+    "tipo": "personalizada",
+    "produto_id": 1,
+    "personalizacao": {
+        "sabor": "baunilha",
+        "tamanho": "medio",
+        "cor": "rosa"
+    },
+    "quantidade": 1,
+    "metodo_envio": "entrega",
+    "morada": "Rua X",
+    "data_desejada": "2026-04-30",
+    "total": 30.0,
+    "estado": "Pendente"
     }
 ]
