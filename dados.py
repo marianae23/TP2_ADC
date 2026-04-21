@@ -57,5 +57,20 @@ produtos = [
         "promocao": None,
         "novo": True,
         "avaliacoes": []
+    },
+    {
+        "id": 2,
+        "nome": "Bolo Red Velvet",
+        "categoria": "bolo",
+        "preco": 30.0,
+        "stock": 5,
+        "disponivel": True,
+        "sabores": ["baunilha", "cacao"],
+        "tamanhos": ["medio", "grande"],
+        "cores": ["vermelho"],
+        "intolerancias": [],
+        "promocao": None,
+        "novo": True,
+        "avaliacoes": []
     }
 ]
