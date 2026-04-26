@@ -43,6 +43,13 @@ def filtrar_por_sabor(sabor):
     ]
 
 
+def filtrar_por_tamanho(tamanho):
+    return [
+        produto for produto in produtos
+        if tamanho.lower() in [t.lower() for t in produto["tamanhos"]]
+    ]
+
+
 def filtrar_por_cor(cor):
     return [
         produto for produto in produtos
@@ -56,7 +63,7 @@ def filtrar_por_preco(preco_maximo):
 
     return [
         produto for produto in produtos
-        if produto["preco"] <= preco_maximo
+        if calcular_preco_final(produto["id"]) <= preco_maximo
     ]
 
 
@@ -89,13 +96,17 @@ def produtos_stock_baixo(limite=5):
     ]
 
 
-def aplicar_promocao(id_produto, desconto):
-    if desconto <= 0 or desconto > 100:
+def aplicar_promocao(id_produto, desconto, data_inicio, data_fim):
+    if desconto <= 0 or desconto >= 100:
         return "Desconto inválido"
 
     for produto in produtos:
         if produto["id"] == id_produto:
-            produto["promocao"] = desconto
+            produto["promocao"] = {
+                "desconto": desconto,
+                "data_inicio": data_inicio,
+                "data_fim": data_fim
+            }
             return "Promoção aplicada com sucesso"
 
     return "Produto não encontrado"
@@ -117,21 +128,33 @@ def calcular_preco_final(id_produto):
             promocao = produto["promocao"]
 
             if promocao is not None:
-                preco -= preco * (promocao / 100)
+                desconto = promocao["desconto"]
+                preco -= preco * (desconto / 100)
 
             return round(preco, 2)
 
     return "Produto não encontrado"
 
 
-def avaliar_produto(id_produto, avaliacao):
+def avaliar_produto(id_produto, avaliacao, comentario=""):
     if avaliacao < 1 or avaliacao > 5:
         return "Avaliação inválida"
 
     for produto in produtos:
         if produto["id"] == id_produto:
-            produto["avaliacoes"].append(avaliacao)
+            produto["avaliacoes"].append({
+                "nota": avaliacao,
+                "comentario": comentario
+            })
             return "Avaliação adicionada com sucesso"
+
+    return "Produto não encontrado"
+
+
+def listar_avaliacoes(id_produto):
+    for produto in produtos:
+        if produto["id"] == id_produto:
+            return produto["avaliacoes"]
 
     return "Produto não encontrado"
 
@@ -142,7 +165,15 @@ def media_avaliacoes(id_produto):
             if not produto["avaliacoes"]:
                 return "Sem avaliações"
 
-            media = sum(produto["avaliacoes"]) / len(produto["avaliacoes"])
+            total = 0
+
+            for avaliacao in produto["avaliacoes"]:
+                if isinstance(avaliacao, dict):
+                    total += avaliacao["nota"]
+                else:
+                    total += avaliacao
+
+            media = total / len(produto["avaliacoes"])
             return round(media, 2)
 
     return "Produto não encontrado"
@@ -153,12 +184,11 @@ def produto_mais_bem_avaliado():
     melhor_media = 0
 
     for produto in produtos:
-        if produto["avaliacoes"]:
-            media = sum(produto["avaliacoes"]) / len(produto["avaliacoes"])
+        media = media_avaliacoes(produto["id"])
 
-            if media > melhor_media:
-                melhor_media = media
-                melhor_produto = produto
+        if isinstance(media, float) and media > melhor_media:
+            melhor_media = media
+            melhor_produto = produto
 
     if melhor_produto is None:
         return "Sem avaliações"
@@ -176,10 +206,12 @@ def recomendar_produto():
 
 
 def produto_do_dia():
-    if not produtos:
-        return "Não existem produtos"
+    disponiveis = listar_produtos_disponiveis()
 
-    return random.choice(produtos)
+    if not disponiveis:
+        return "Sem produtos disponíveis"
+
+    return random.choice(disponiveis)
 
 
 def resumo_produto(id_produto):
@@ -194,6 +226,10 @@ def resumo_produto(id_produto):
                 "preco_final": preco_final,
                 "stock": produto["stock"],
                 "disponivel": produto["disponivel"],
+                "sabores": produto["sabores"],
+                "tamanhos": produto["tamanhos"],
+                "cores": produto["cores"],
+                "intolerancias": produto["intolerancias"],
                 "novo": produto["novo"],
                 "promocao": produto["promocao"],
                 "media_avaliacoes": media_avaliacoes(id_produto)
