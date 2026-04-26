@@ -1,9 +1,27 @@
-Utilizador
-==========
+user.py
+=======
 
-Módulo responsável pelas ações do utilizador.
+Descrição
+=========
 
-.. automodule:: user
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Módulo responsável pelas operações do cliente.
+
+Funcionalidades
+===============
+
+Pedidos
+=======
+
+- fazer pedidos
+- adicionar comentários em encomendas
+
+Consultas
+=========
+
+- listar pedidos do cliente
+- consultar estado de pedido
+
+Produtos
+========
+
+- listar produtos disponíveis para compra
