@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from dados import encomendas, produtos
 def ordenar_por_data ():
     return sorted(key=lambda e:e["data_desejada"])
@@ -74,3 +75,22 @@ def alterar_precos(id_produto, novo_preco):
             return f'Preço do produto "{produto["nome"]}" atualizado para €{novo_preco}'
 
     return "Produto não encontrado"
+=======
+from produtos import produtos
+from encomendas import encomendas
+def ordenar_por_data ()
+    return sorted(key=lamba, e: "data_desejada")
+
+def mostrar_produtos()
+    return produtos
+
+def alterar_estado_encomenda()
+
+def verificar_stock()
+
+def adicionar_produto()
+
+def remover_produto()
+
+def alterar_preços()
+>>>>>>> 82347a8aec7238121546c9dedc74997402fe9a32

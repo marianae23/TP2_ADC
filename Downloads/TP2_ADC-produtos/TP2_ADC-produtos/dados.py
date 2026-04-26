@@ -1,19 +1,18 @@
 produtos = [
     {
-    "id": 1,
-    "nome": "Bolo de Chocolate",
-    "categoria": "bolo",
-    "preco": 25.0,
-    "stock": 10,
-    "disponivel": True,
-    "sabores": ["chocolate"],
-    "tamanhos": ["pequeno", "medio", "grande"],
-    "cores": ["castanho"],
-    "intolerancias": ["sem glúten"],
-    "promocao": None,
-    "novo": False,
-    "avaliacoes": []
-<<<<<<< HEAD
+        "id": 1,
+        "nome": "Bolo de Chocolate",
+        "categoria": "bolo",
+        "preco": 25.0,
+        "stock": 10,
+        "disponivel": True,
+        "sabores": ["chocolate"],
+        "tamanhos": ["pequeno", "medio", "grande"],
+        "cores": ["castanho"],
+        "intolerancias": ["sem glúten"],
+        "promocao": None,
+        "novo": False,
+        "avaliacoes": []
     },
     {
         "id": 2,
@@ -60,7 +59,7 @@ produtos = [
         "avaliacoes": []
     },
     {
-        "id": 5,
+        "id": 2,
         "nome": "Bolo Red Velvet",
         "categoria": "bolo",
         "preco": 30.0,
@@ -73,7 +72,5 @@ produtos = [
         "promocao": None,
         "novo": True,
         "avaliacoes": []
-=======
->>>>>>> 82347a8aec7238121546c9dedc74997402fe9a32
     }
 ]
