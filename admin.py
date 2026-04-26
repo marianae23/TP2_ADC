@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-from dados import encomendas, produtos
+from dados import encomendas, produtos, formas_pagamento
 def ordenar_por_data ():
-    return sorted(key=lambda e:e["data_desejada"])
+    return sorted(encomendas, key=lambda e:e["data_desejada"])
 
 def mostrar_produtos():
     return produtos
@@ -75,22 +74,19 @@ def alterar_precos(id_produto, novo_preco):
             return f'Preço do produto "{produto["nome"]}" atualizado para €{novo_preco}'
 
     return "Produto não encontrado"
-=======
-from produtos import produtos
-from encomendas import encomendas
-def ordenar_por_data ()
-    return sorted(key=lamba, e: "data_desejada")
 
-def mostrar_produtos()
-    return produtos
+def mostrar_formas_pagamento():
+    return formas_pagamento
 
-def alterar_estado_encomenda()
 
-def verificar_stock()
+def adicionar_forma_pagamento(nova_forma):
+    formas_pagamento.append(nova_forma)
+    return f'Forma de pagamento "{nova_forma}" adicionada com sucesso.'
 
-def adicionar_produto()
 
-def remover_produto()
+def remover_forma_pagamento(forma):
+    if forma in formas_pagamento:
+        formas_pagamento.remove(forma)
+        return f'Forma de pagamento "{forma}" removida com sucesso.'
 
-def alterar_preços()
->>>>>>> 82347a8aec7238121546c9dedc74997402fe9a32
+    return "Forma de pagamento não encontrada."

@@ -13,7 +13,6 @@ produtos = [
     "promocao": None,
     "novo": False,
     "avaliacoes": []
-<<<<<<< HEAD
     },
     {
         "id": 2,
@@ -73,7 +72,5 @@ produtos = [
         "promocao": None,
         "novo": True,
         "avaliacoes": []
-=======
->>>>>>> 82347a8aec7238121546c9dedc74997402fe9a32
     }
 ]

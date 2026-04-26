@@ -19,6 +19,7 @@ produtos = [
         "nome": "Cupcake de Morango",
         "categoria": "Cupcake",
         "preco": 3.5,
+        "stock": 10,
         "disponivel": True,
         "sabores": ["morango"],
         "tamanhos": ["unico"],
@@ -63,8 +64,8 @@ produtos = [
         "nome": "Bolo Red Velvet",
         "categoria": "bolo",
         "preco": 30.0,
-        "stock": 5,
-        "disponivel": True,
+        "stock": 0,
+        "disponivel": False,
         "sabores": ["baunilha", "cacao"],
         "tamanhos": ["medio", "grande"],
         "cores": ["vermelho"],
@@ -93,6 +94,15 @@ encomendas = [
     "morada": "Rua X",
     "data_desejada": "2026-04-30",
     "total": 30.0,
-    "estado": "Pendente"
+    "estado": "Pendente",
+    "comentarios": ""
     }
+]
+formas_pagamento = [
+    "MB WAY",
+    "Cartão de crédito",
+    "Cartão de débito",
+    "PayPal",
+    "Transferência bancária",
+    "Pagamento na entrega"
 ]
