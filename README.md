@@ -346,5 +346,3 @@ Consultar histórico
 ## Autores
 
 Grupo D
-
-Projeto académico desenvolvido para gestão de doceria.
