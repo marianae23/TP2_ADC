@@ -1,6 +1,8 @@
-from admin import *
+import admin
+
+
 while True:
-    print("ADMIN")
+    print("\n=== ADMIN ===")
     print("1 - Ver produtos")
     print("2 - Verificar stock")
     print("3 - Alterar preço")
@@ -10,20 +12,33 @@ while True:
     opcao = input("Escolhe: ")
 
     if opcao == "1":
-        print(produtos)
+        print(admin.mostrar_produtos())
 
     elif opcao == "2":
-        id_prod = int(input("ID do produto: "))
-        print(verificar_stock(id_prod))
+        try:
+            id_prod = int(input("ID do produto: "))
+            print(admin.verificar_stock(id_prod))
+        except ValueError:
+            print("ID inválido.")
 
     elif opcao == "3":
-        id_prod = int(input("ID: "))
-        preco = float(input("Novo preço: "))
-        print(alterar_precos(id_prod, preco))
+        try:
+            id_prod = int(input("ID do produto: "))
+            preco = float(input("Novo preço: "))
+            print(admin.alterar_precos(id_prod, preco))
+        except ValueError:
+            print("Valor inválido.")
 
     elif opcao == "4":
-        id_prod = int(input("ID: "))
-        print(remover_produto(id_prod))
+        try:
+            id_prod = int(input("ID do produto: "))
+            print(admin.remover_produto(id_prod))
+        except ValueError:
+            print("ID inválido.")
 
     elif opcao == "0":
+        print("A sair do sistema...")
         break
+
+    else:
+        print("Opção inválida. Tenta novamente.")
