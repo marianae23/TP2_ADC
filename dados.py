@@ -92,9 +92,40 @@ encomendas = [
         },
         "quantidade": 1,
         "metodo_envio": "entrega",
+        "metodo_pagamento": "MB Way",
         "morada": "Rua X",
         "data_desejada": "2026-04-30",
         "total": 30.0,
         "estado": "Pendente"
     }
 ]
+
+
+datas_bloqueadas = []
+
+stock_maximo_mensal = {
+    "limite": 50
+}
+
+metodos_pagamento = [
+    "MB Way",
+    "Multibanco",
+    "Dinheiro",
+    "Cartão"
+]
+
+metodos_envio = [
+    "entrega",
+    "recolha"
+]
+
+lista_compras = [
+    "Farinha",
+    "Açúcar",
+    "Ovos",
+    "Chocolate"
+]
+
+rede_social = {
+    "instagram": "https://instagram.com/doceria"
+}
