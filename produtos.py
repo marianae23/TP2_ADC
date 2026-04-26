@@ -1,76 +1,54 @@
-produtos = [
-    {
-        "id": 1,
-        "nome": "Bolo de Chocolate",
-        "categoria": "bolo",
-        "preco": 25.0,
-        "stock": 10,
-        "disponivel": True,
-        "sabores": ["chocolate"],
-        "tamanhos": ["pequeno", "medio", "grande"],
-        "cores": ["castanho"],
-        "intolerancias": ["sem glúten"],
-        "promocao": None,
-        "novo": False,
-        "avaliacoes": []
-    },
-    {
-        "id": 2,
-        "nome": "Cupcake de Morango",
-        "categoria": "Cupcake",
-        "preco": 3.5,
-        "disponivel": True,
-        "sabores": ["morango"],
-        "tamanhos": ["unico"],
-        "cores": ["rosa"],
-        "intolerancias": [],
-        "novo": False,
-        "promocao": None,
-        "avaliacoes": []
-    },
-    {
-        "id": 3,
-        "nome": "Cookies de Chocolate",
-        "categoria": "bolacha",
-        "preco": 5.0,
-        "stock": 30,
-        "disponivel": True,
-        "sabores": ["chocolate"],
-        "tamanhos": ["pack"],
-        "cores": ["castanho"],
-        "intolerancias": [],
-        "promocao": None,
-        "novo": False,
-        "avaliacoes": []
-    },
-    {
-        "id": 4,
-        "nome": "Donut de Chocolate",
-        "categoria": "donut",
-        "preco": 2.5,
-        "stock": 25,
-        "disponivel": True,
-        "sabores": ["chocolate"],
-        "tamanhos": ["unico"],
-        "cores": ["castanho"],
-        "intolerancias": [],
-        "promocao": None,
-        "novo": True,
-        "avaliacoes": []
-    },
-    {
-        "id": 5,
-        "nome": "Bolo Red Velvet",
-        "categoria": "bolo",
-        "preco": 30.0,
-        "stock": 5,
-        "disponivel": True,
-        "sabores": ["baunilha", "cacao"],
-        "tamanhos": ["medio", "grande"],
-        "cores": ["vermelho"],
-        "intolerancias": [],
-        "promocao": None,
-        "novo": True,
-        "avaliacoes": []
-    }
-]
+from dados import produtos
+
+
+def listar_produtos():
+    return produtos
+
+
+def procurar_produto_por_id(id_produto):
+    for produto in produtos:
+        if produto["id"] == id_produto:
+            return produto
+    return "Produto não encontrado"
+
+
+def filtrar_por_categoria(categoria):
+    resultado = []
+
+    for produto in produtos:
+        if produto["categoria"].lower() == categoria.lower():
+            resultado.append(produto)
+
+    return resultado
+
+
+def listar_produtos_novos():
+    return [produto for produto in produtos if produto["novo"]]
+
+
+def listar_produtos_em_promocao():
+    return [produto for produto in produtos if produto["promocao"] is not None]
+
+
+def avaliar_produto(id_produto, avaliacao):
+    if avaliacao < 1 or avaliacao > 5:
+        return "Avaliação inválida"
+
+    for produto in produtos:
+        if produto["id"] == id_produto:
+            produto["avaliacoes"].append(avaliacao)
+            return "Avaliação adicionada com sucesso"
+
+    return "Produto não encontrado"
+
+
+def media_avaliacoes(id_produto):
+    for produto in produtos:
+        if produto["id"] == id_produto:
+            if not produto["avaliacoes"]:
+                return "Sem avaliações"
+
+            media = sum(produto["avaliacoes"]) / len(produto["avaliacoes"])
+            return round(media, 2)
+
+    return "Produto não encontrado"
