@@ -14,6 +14,12 @@ ESTADOS_CANCELAMENTO_BLOQUEADO = [
 ]
 
 
+TIPOS_ENCOMENDA = [
+    "personalizada",
+    "produto existente"
+]
+
+
 def listar_encomendas():
     return encomendas
 
@@ -41,7 +47,9 @@ def calcular_preco_com_promocao(produto):
         return preco
 
     desconto = produto["promocao"]["desconto"]
-    return preco - (preco * desconto / 100)
+    preco_final = preco - (preco * desconto / 100)
+
+    return round(preco_final, 2)
 
 
 def contar_encomendas_mes(ano_mes):
@@ -55,10 +63,7 @@ def contar_encomendas_mes(ano_mes):
 
 
 def verificar_data_disponivel(data_desejada):
-    if data_desejada in datas_bloqueadas:
-        return False
-
-    return True
+    return data_desejada not in datas_bloqueadas
 
 
 def verificar_limite_mensal(data_desejada, quantidade):
@@ -84,7 +89,7 @@ def criar_encomenda(
     if quantidade <= 0:
         return "Quantidade inválida"
 
-    if tipo not in ["personalizada", "produto existente"]:
+    if tipo not in TIPOS_ENCOMENDA:
         return "Tipo de encomenda inválido"
 
     if metodo_envio not in metodos_envio:
@@ -112,7 +117,7 @@ def criar_encomenda(
 
     novo_id = max((e["id"] for e in encomendas), default=0) + 1
     preco_unitario = calcular_preco_com_promocao(produto)
-    total = preco_unitario * quantidade
+    total = round(preco_unitario * quantidade, 2)
 
     nova_encomenda = {
         "id": novo_id,
@@ -128,7 +133,8 @@ def criar_encomenda(
         "morada": morada,
         "data_desejada": data_desejada,
         "total": total,
-        "estado": "Pendente"
+        "estado": "Pendente",
+        "comentarios": ""
     }
 
     encomendas.append(nova_encomenda)
@@ -209,7 +215,7 @@ def total_vendas():
         if encomenda["estado"] == "Entregue":
             total += encomenda["total"]
 
-    return total
+    return round(total, 2)
 
 
 def ordenar_encomendas_por_data():
@@ -230,7 +236,8 @@ def resumo_encomenda(id_encomenda):
                 "metodo_pagamento": encomenda["metodo_pagamento"],
                 "total": encomenda["total"],
                 "estado": encomenda["estado"],
-                "data_entrega": encomenda["data_desejada"]
+                "data_entrega": encomenda["data_desejada"],
+                "comentarios": encomenda.get("comentarios", "")
             }
 
     return "Encomenda não encontrada"

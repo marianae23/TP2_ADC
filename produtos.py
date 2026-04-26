@@ -63,7 +63,8 @@ def filtrar_por_preco(preco_maximo):
 
     return [
         produto for produto in produtos
-        if calcular_preco_final(produto["id"]) <= preco_maximo
+        if isinstance(calcular_preco_final(produto["id"]), float)
+        and calcular_preco_final(produto["id"]) <= preco_maximo
     ]
 
 

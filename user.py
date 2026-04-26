@@ -1,5 +1,5 @@
-from dados import encomendas, produtos, formas_pagamento, metodos_envio
-from admin import *
+from dados import encomendas, produtos
+from encomendas import criar_encomenda
 
 
 def adicionar_comentario_encomenda(id_encomenda, comentario):
@@ -11,48 +11,57 @@ def adicionar_comentario_encomenda(id_encomenda, comentario):
     return "Encomenda não encontrada"
 
 
-def fazer_pedido(cliente_nome, email, telefone, produto_id, quantidade, metodo_envio, morada, data_desejada, comentario, forma_pagamento):
-    produto_escolhido = None
+def fazer_pedido(
+    cliente_nome,
+    email,
+    telefone,
+    produto_id,
+    quantidade,
+    metodo_envio,
+    metodo_pagamento,
+    morada,
+    data_desejada,
+    comentario=""
+):
+    resultado = criar_encomenda(
+        cliente_nome=cliente_nome,
+        email=email,
+        telefone=telefone,
+        tipo="produto existente",
+        produto_id=produto_id,
+        quantidade=quantidade,
+        metodo_envio=metodo_envio,
+        metodo_pagamento=metodo_pagamento,
+        morada=morada,
+        data_desejada=data_desejada
+    )
 
-    for produto in produtos:
-        if produto["id"] == produto_id:
-            produto_escolhido = produto
-            break
+    if resultado != "Encomenda criada com sucesso":
+        return resultado
 
-    if produto_escolhido is None:
-        return "Produto não encontrado."
+    encomenda_criada = encomendas[-1]
+    encomenda_criada["comentarios"] = comentario
 
-    if produto_escolhido["disponivel"] == False:
-        return "Produto indisponível."
+    return f'Pedido criado com sucesso! Total: €{encomenda_criada["total"]}'
 
-    if produto_escolhido["stock"] < quantidade:
-        return "Stock insuficiente."
 
-    novo_id = max(e["id"] for e in encomendas) + 1 if encomendas else 1
-    total = produto_escolhido["preco"] * quantidade
+def listar_pedidos_cliente(email):
+    return [
+        encomenda for encomenda in encomendas
+        if encomenda["email"] == email
+    ]
 
-    nova_encomenda = {
-        "id": novo_id,
-        "cliente_nome": cliente_nome,
-        "email": email,
-        "telefone": telefone,
-        "tipo": "normal",
-        "produto_id": produto_id,
-        "personalizacao": {},
-        "quantidade": quantidade,
-        "metodo_envio": metodo_envio,
-        "morada": morada,
-        "data_desejada": data_desejada,
-        "total": total,
-        "estado": "Pendente",
-        "comentarios": comentario,
-        "forma_pagamento": forma_pagamento
-    }
 
-    encomendas.append(nova_encomenda)
-    produto_escolhido["stock"] -= quantidade
+def ver_estado_pedido(id_encomenda):
+    for encomenda in encomendas:
+        if encomenda["id"] == id_encomenda:
+            return encomenda["estado"]
 
-    if produto_escolhido["stock"] == 0:
-        produto_escolhido["disponivel"] = False
+    return "Encomenda não encontrada"
 
-    return f"Pedido criado com sucesso! Total: €{total}"
+
+def listar_produtos_cliente():
+    return [
+        produto for produto in produtos
+        if produto["disponivel"] and produto["stock"] > 0
+    ]

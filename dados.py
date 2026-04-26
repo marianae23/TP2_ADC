@@ -91,8 +91,8 @@ encomendas = [
             "cor": "rosa"
         },
         "quantidade": 1,
-        "metodo_envio": "entrega",
-        "forma_pagamento": "MB WAY",
+        "metodo_envio": "Entrega",
+        "metodo_pagamento": "MB WAY",
         "morada": "Rua X",
         "data_desejada": "2026-04-30",
         "total": 30.0,
@@ -102,7 +102,7 @@ encomendas = [
 ]
 
 
-formas_pagamento = [
+metodos_pagamento = [
     "MB WAY",
     "Cartão de crédito",
     "Cartão de débito",
@@ -135,9 +135,11 @@ estados_encomenda = [
 
 datas_bloqueadas = []
 
+
 stock_maximo_mensal = {
     "limite": 50
 }
+
 
 lista_compras = [
     "Farinha",
@@ -146,8 +148,10 @@ lista_compras = [
     "Chocolate"
 ]
 
+
 rede_social = {
     "instagram": "https://instagram.com/doceria"
 }
+
 
 usuarios = []

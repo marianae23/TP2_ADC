@@ -1,7 +1,7 @@
 from dados import (
     encomendas,
     produtos,
-    formas_pagamento,
+    metodos_pagamento,
     datas_bloqueadas,
     stock_maximo_mensal,
     lista_compras,
@@ -50,13 +50,25 @@ def verificar_stock(id_produto):
     for produto in produtos:
         if produto["id"] == id_produto:
             if produto["stock"] > 0 and produto["disponivel"]:
-                return f'O produto {produto["nome"]} está disponível. Stock: {produto["stock"]}'
+                return (
+                    f'O produto {produto["nome"]} está disponível. '
+                    f'Stock: {produto["stock"]}'
+                )
             return f'O produto {produto["nome"]} está indisponível ou sem stock.'
 
     return "Produto não encontrado"
 
 
-def adicionar_produto(nome, categoria, preco, stock, sabores, tamanhos, cores, intolerancias):
+def adicionar_produto(
+    nome,
+    categoria,
+    preco,
+    stock,
+    sabores,
+    tamanhos,
+    cores,
+    intolerancias
+):
     if preco <= 0:
         return "Preço inválido"
 
@@ -106,24 +118,24 @@ def alterar_precos(id_produto, novo_preco):
     return "Produto não encontrado"
 
 
-def mostrar_formas_pagamento():
-    return formas_pagamento
+def mostrar_metodos_pagamento():
+    return metodos_pagamento
 
 
-def adicionar_forma_pagamento(nova_forma):
-    if nova_forma in formas_pagamento:
-        return "Esta forma de pagamento já existe."
+def adicionar_metodo_pagamento(novo_metodo):
+    if novo_metodo in metodos_pagamento:
+        return "Este método de pagamento já existe."
 
-    formas_pagamento.append(nova_forma)
-    return f'Forma de pagamento "{nova_forma}" adicionada com sucesso.'
+    metodos_pagamento.append(novo_metodo)
+    return f'Método de pagamento "{novo_metodo}" adicionado com sucesso.'
 
 
-def remover_forma_pagamento(forma):
-    if forma in formas_pagamento:
-        formas_pagamento.remove(forma)
-        return f'Forma de pagamento "{forma}" removida com sucesso.'
+def remover_metodo_pagamento(metodo):
+    if metodo in metodos_pagamento:
+        metodos_pagamento.remove(metodo)
+        return f'Método de pagamento "{metodo}" removido com sucesso.'
 
-    return "Forma de pagamento não encontrada."
+    return "Método de pagamento não encontrado."
 
 
 def editar_stock(id_produto, novo_stock):
@@ -185,7 +197,10 @@ def ver_checkout_encomenda(id_encomenda):
                 "morada": encomenda["morada"],
                 "data_desejada": encomenda["data_desejada"],
                 "metodo_envio": encomenda["metodo_envio"],
-                "metodo_pagamento": encomenda.get("forma_pagamento", "Não definido"),
+                "metodo_pagamento": encomenda.get(
+                    "metodo_pagamento",
+                    "Não definido"
+                ),
                 "total": encomenda["total"],
                 "estado": encomenda["estado"]
             }
