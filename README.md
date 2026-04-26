@@ -2,9 +2,9 @@
 
 ## Descrição
 
-O Sistema de Gestão de Doceria é uma aplicação desenvolvida em Python para gerir produtos, encomendas e operações administrativas de uma doceria.
+O **Sistema de Gestão de Doceria** é uma aplicação desenvolvida em Python para gestão de produtos, encomendas e operações administrativas de uma doceria.
 
-O sistema permite a separação de funcionalidades entre clientes e administradores, facilitando o processo de compra, gestão de encomendas e controlo interno.
+O sistema permite a separação de funcionalidades entre clientes e administradores, facilitando o processo de compra, personalização de encomendas, gestão de stock, promoções e controlo interno.
 
 ---
 
@@ -22,7 +22,7 @@ O sistema permite a separação de funcionalidades entre clientes e administrado
 
 ## Funcionalidades do Cliente
 
-- Visualizar produtos disponíveis
+- Visualizar catálogo de produtos
 - Procurar produtos por nome
 - Filtrar produtos por categoria
 - Filtrar produtos por sabor
@@ -31,9 +31,10 @@ O sistema permite a separação de funcionalidades entre clientes e administrado
 - Fazer encomendas
 - Cancelar encomendas
 - Consultar estado da encomenda
-- Consultar tempo estimado
+- Consultar tempo estimado de entrega
 - Avaliar produtos
 - Consultar avaliações
+- Consultar produto do dia
 
 ---
 
@@ -41,15 +42,16 @@ O sistema permite a separação de funcionalidades entre clientes e administrado
 
 - Visualizar produtos
 - Verificar stock
-- Alterar preços
-- Remover produtos
 - Adicionar produtos
+- Remover produtos
+- Alterar preços
 - Gerir promoções
 - Alterar estado de encomendas
 - Consultar checkout
 - Consultar histórico de compras
 - Bloquear datas
 - Gerir lista de compras
+- Gerir métodos de pagamento
 - Gerir redes sociais
 - Definir stock máximo mensal
 
@@ -74,79 +76,133 @@ SistemaDoceria/
 
 ## Estrutura dos Módulos
 
-### admin.py
+### `dados.py`
 
-Módulo responsável pela gestão administrativa.
-
-Funções principais:
-
-- gerir produtos
-- gerir stock
-- gerir promoções
-- gerir estados de encomendas
-- gerir checkout
-
----
-
-### dados.py
-
-Módulo responsável pelo armazenamento dos dados do sistema.
+Módulo responsável pelo armazenamento central de dados do sistema em memória.
 
 Contém:
 
-- produtos
-- encomendas
+- catálogo de produtos
+- encomendas registadas
 - métodos de pagamento
 - métodos de envio
 - estados de encomenda
 - datas bloqueadas
 - stock máximo mensal
+- lista de compras
+- redes sociais
+- utilizadores
 
 ---
 
-### encomendas.py
+### `produtos.py`
 
-Módulo responsável pela gestão de encomendas.
+Módulo responsável pela gestão e manipulação do catálogo de produtos.
 
-Funções principais:
+**Funcionalidades:**
 
+- listagem de produtos
+- pesquisa por ID
+- pesquisa por nome
+- filtros por categoria
+- filtros por sabor
+- filtros por tamanho
+- filtros por cor
+- filtros por preço
+- filtros por intolerâncias
+- gestão de promoções
+- cálculo de preço final
+- sistema de avaliações
+- cálculo de média de avaliações
+- recomendação de produtos
+- resumo detalhado de produtos
+
+---
+
+### `encomendas.py`
+
+Módulo responsável pela gestão das encomendas.
+
+**Funcionalidades:**
+
+- listar encomendas
+- procurar encomendas
 - criar encomendas
 - cancelar encomendas
 - alterar data de entrega
+- validar stock
+- validar datas disponíveis
+- validar limite mensal
 - calcular total
+- estimar tempo de espera
+- gerar resumo de encomenda
+- emitir alerta de atraso
 
 ---
 
-### produtos.py
+### `user.py`
 
-Módulo responsável pela gestão de produtos.
+Módulo responsável pelas operações do cliente.
 
-Funções principais:
-
-- listar produtos
-- filtrar produtos
-- promoções
-- avaliações
-
----
-
-### user.py
-
-Módulo responsável pelas ações do utilizador.
-
-Funções principais:
+**Funcionalidades:**
 
 - fazer pedidos
-- comentar encomendas
+- adicionar comentários
 - consultar pedidos
+- consultar estado do pedido
+- listar produtos disponíveis
 
 ---
 
-### main.py
+### `admin.py`
 
-Módulo principal.
+Módulo responsável pelas operações administrativas.
 
-Responsável pelos menus e interação com o utilizador.
+**Funcionalidades:**
+
+- gestão de produtos
+- gestão de stock
+- gestão de promoções
+- gestão de métodos de pagamento
+- gestão de datas bloqueadas
+- gestão de encomendas
+- gestão de histórico de clientes
+- gestão de lista de compras
+- gestão de redes sociais
+- controlo de stock máximo mensal
+
+---
+
+### `main.py`
+
+Módulo principal do sistema.
+
+Responsável por:
+
+- iniciar aplicação
+- apresentar menus
+- separar acesso cliente e administrador
+- recolher dados do utilizador
+- chamar operações do sistema
+
+---
+
+### `testes.py`
+
+Módulo de testes automatizados com Pytest.
+
+**Testes implementados:**
+
+- listagem de produtos
+- pesquisa de produtos
+- filtros
+- promoções
+- avaliações
+- criação de encomendas
+- cancelamento de encomendas
+- alteração de estados
+- alteração de preços
+- bloqueio de datas
 
 ---
 
@@ -171,7 +227,7 @@ git clone <url-do-repositorio>
 ### Entrar no projeto
 
 ```bash
-cd nome-do-projeto
+cd SistemaDoceria
 ```
 
 ---
@@ -217,7 +273,7 @@ py -m pip install sphinx
 ### Gerar documentação
 
 ```bash
-py -m sphinx -b html source build
+py -m sphinx -b html docs/source docs/build
 ```
 
 ### Abrir documentação
@@ -238,7 +294,8 @@ docs/build/index.html
 ### Encomendas
 
 - Devem respeitar datas disponíveis
-- Devem respeitar limite mensal
+- Devem respeitar limite mensal de produção
+- Quantidade deve ser superior a zero
 
 ### Cancelamento
 
@@ -247,7 +304,7 @@ docs/build/index.html
 
 ### Promoções
 
-- Desconto entre 1% e 99%
+- Desconto deve estar entre 1% e 99%
 
 ### Avaliações
 
@@ -260,39 +317,39 @@ docs/build/index.html
 
 Entrar no sistema
 
-↓
+↓  
 
 Escolher modo cliente
 
-↓
+↓  
 
-Visualizar catálogo
+Consultar catálogo
 
-↓
+↓  
 
-Escolher produto
+Selecionar produto
 
-↓
+↓  
 
 Criar encomenda
 
-↓
+↓  
 
-Escolher envio
+Selecionar envio
 
-↓
+↓  
 
-Escolher pagamento
+Selecionar pagamento
 
-↓
+↓  
 
 Confirmar pedido
 
-↓
+↓  
 
 Consultar estado
 
-↓
+↓  
 
 Avaliar produto
 
@@ -302,47 +359,47 @@ Avaliar produto
 
 Entrar no sistema
 
-↓
+↓  
 
 Escolher modo administrador
 
-↓
+↓  
 
 Gerir produtos
 
-↓
-
-Gerir encomendas
-
-↓
+↓  
 
 Gerir stock
 
-↓
+↓  
 
 Gerir promoções
 
-↓
+↓  
+
+Gerir encomendas
+
+↓  
 
 Consultar histórico
+
+↓  
+
+Controlar operação
 
 ---
 
 ## Testes Implementados
 
-- Listagem de produtos
-- Pesquisa de produtos
-- Filtros
-- Promoções
-- Avaliações
-- Criação de encomendas
-- Cancelamento de encomendas
-- Alteração de estado
-- Alteração de preço
-- Bloqueio de datas
+- Testes unitários
+- Testes funcionais
+- Validação de regras de negócio
+- Validação de estados
+- Validação de stock
+- Validação de datas bloqueadas
 
 ---
 
 ## Autores
 
-Grupo D
+**Grupo D**
