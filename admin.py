@@ -20,14 +20,26 @@ ESTADOS_VALIDOS = [
 
 
 def ordenar_por_data():
+    """
+    Ordena as encomendas pela data de entrega desejada
+    :return: Lista de encomendas ordenadas por data
+    """
     return sorted(encomendas, key=lambda e: e["data_desejada"])
 
 
 def mostrar_produtos():
+    """
+    Retorna a lista de todos produtos
+    :return: lista de todos produtos
+    """
     return produtos
 
 
 def mostrar_produtos_disponiveis():
+    """
+    Mostra a lista dos produtos que estão disponiveis para venda
+    :return: lista de produtos disponiveis
+    """
     return [
         produto for produto in produtos
         if produto["disponivel"] and produto["stock"] > 0
@@ -35,6 +47,12 @@ def mostrar_produtos_disponiveis():
 
 
 def alterar_estado_encomenda(id_encomenda, novo_estado):
+    """
+    Altera o estado de uma encomenda.
+    :param id_encomenda: ID da encomenda
+    :param novo_estado: Novo estado a atribuir
+    :return: Mensagem de sucesso ou erro
+    """
     if novo_estado not in ESTADOS_VALIDOS:
         return "Estado inválido"
 
@@ -47,6 +65,11 @@ def alterar_estado_encomenda(id_encomenda, novo_estado):
 
 
 def verificar_stock(id_produto):
+    """
+    Verifica o stock de um produto.
+    :param id_produto: ID do produto
+    :return: Informação sobre disponibilidade
+    """
     for produto in produtos:
         if produto["id"] == id_produto:
             if produto["stock"] > 0 and produto["disponivel"]:
@@ -69,6 +92,19 @@ def adicionar_produto(
     cores,
     intolerancias
 ):
+    """
+    Adiciona um novo produto ao sistema.
+
+    :param nome: Nome do produto
+    :param categoria: Categoria do produto
+    :param preco: Preço do produto
+    :param stock: Quantidade disponível
+    :param sabores: Lista de sabores
+    :param tamanhos: Lista de tamanhos
+    :param cores: Lista de cores
+    :param intolerancias: Lista de intolerâncias
+    :return: Mensagem de confirmação
+    """
     if preco <= 0:
         return "Preço inválido"
 
@@ -107,6 +143,12 @@ def remover_produto(id_produto):
 
 
 def alterar_precos(id_produto, novo_preco):
+    """
+    Altera o preço de um produto.
+    :param id_produto: ID do produto
+    :param novo_preco: Novo preço a aplicar
+    :return: Mensagem de sucesso ou erro
+    """
     if novo_preco <= 0:
         return "Preço inválido"
 
@@ -123,6 +165,12 @@ def mostrar_metodos_pagamento():
 
 
 def adicionar_metodo_pagamento(novo_metodo):
+    """
+    Adiciona um novo método de pagamento.
+
+    :param novo_metodo: Método a adicionar
+    :return: Mensagem de confirmação
+    """
     if novo_metodo in metodos_pagamento:
         return "Este método de pagamento já existe."
 
@@ -152,6 +200,14 @@ def editar_stock(id_produto, novo_stock):
 
 
 def adicionar_promocao(id_produto, desconto, data_inicio, data_fim):
+    """
+    Adiciona uma promoção a um produto.
+    :param id_produto: ID do produto
+    :param desconto: Percentagem de desconto
+    :param data_inicio: Data de início da promoção
+    :param data_fim: Data de fim da promoção
+    :return: Mensagem de sucesso ou erro
+    """
     if desconto <= 0 or desconto >= 100:
         return "Desconto inválido"
 
@@ -181,6 +237,10 @@ def listar_produtos_novos():
 
 
 def listar_produtos_em_promocao():
+    """
+    Lista os produtos na atual promoção
+    :return: os produtos que estiverem participando de alguma promoção atualmente
+    """
     return [
         produto for produto in produtos
         if produto["promocao"] is not None
@@ -188,6 +248,11 @@ def listar_produtos_em_promocao():
 
 
 def ver_checkout_encomenda(id_encomenda):
+    """
+    Mostra os detalhes do checkout de uma encomenda.
+    :param id_encomenda: ID da encomenda
+    :return: Dados do checkout ou erro
+    """
     for encomenda in encomendas:
         if encomenda["id"] == id_encomenda:
             return {
@@ -216,6 +281,11 @@ def historico_compras_cliente(email):
 
 
 def bloquear_data(data):
+    """
+    Bloqueia uma data em que encomendas não podem ser entregues
+    :param data: Data a bloquear
+    :return: Mensagem de confirmação
+    """
     if data in datas_bloqueadas:
         return "Esta data já está bloqueada"
 
@@ -244,6 +314,11 @@ def definir_stock_maximo_mensal(limite):
 
 
 def contar_encomendas_mes(ano_mes):
+    """
+    Conta a quantidade de produtos encomendados num mês.
+    :param ano_mes: Ano e mês (YYYY-MM)
+    :return: Total de produtos encomendados
+    """
     total = 0
 
     for encomenda in encomendas:
@@ -254,6 +329,11 @@ def contar_encomendas_mes(ano_mes):
 
 
 def verificar_limite_mensal(ano_mes):
+    """
+    Verifica se o limite mensal de encomendas foi atingido
+    :param ano_mes: Ano e mês (YYYY-MM)
+    :return: Informação sobre disponibilidade
+    """
     total = contar_encomendas_mes(ano_mes)
 
     if total >= stock_maximo_mensal["limite"]:
@@ -264,6 +344,11 @@ def verificar_limite_mensal(ano_mes):
 
 
 def adicionar_ingrediente(nome):
+    """
+    Adiciona um ingrediente a lista de compras
+    :param nome: Nome do ingrediente
+    :return: Mensagem de confirmação ou erro
+    """
     if nome in lista_compras:
         return "Ingrediente já existe na lista"
 
