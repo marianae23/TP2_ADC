@@ -1,10 +1,13 @@
-<<<<<<< HEAD
 from dados import encomendas, produtos
-def ordenar_por_data ():
-    return sorted(key=lambda e:e["data_desejada"])
+
+
+def ordenar_por_data():
+    return sorted(encomendas, key=lambda e: e["data_desejada"])
+
 
 def mostrar_produtos():
     return produtos
+
 
 def alterar_estado_encomenda(id_encomenda, novo_estado):
     estados_validos = ["Pendente", "Em preparação", "Entregue", "Cancelada"]
@@ -18,24 +21,38 @@ def alterar_estado_encomenda(id_encomenda, novo_estado):
             return "Estado da encomenda alterado com sucesso"
 
     return "Encomenda não encontrada"
-    print(alterar_estado_encomenda(1, "Entregue"))
-    print(encomendas[0]["estado"])
+
 
 def verificar_stock(id_produto):
-  for produto in produtos:
+    for produto in produtos:
         if produto["id"] == id_produto:
-            if produto["stock"] > 0 and produto["disponivel"] == True:
-                return f'O produto {produto["nome"]} está disponível. Stock: {produto["stock"]}'
-            else:
-                return f'O produto {produto["nome"]} está indisponível ou sem stock.'
-        else:
-         return "Produto não encontrado"
+            if produto["stock"] > 0 and produto["disponivel"]:
+                return (
+                    f'O produto {produto["nome"]} está disponível. '
+                    f'Stock: {produto["stock"]}'
+                )
+            return f'O produto {produto["nome"]} está indisponível ou sem stock.'
 
-def adicionar_produto(nome, categoria, preco, stock, sabores, tamanhos, cores, intolerancias):
-    if produtos:
-        novo_id = max(p["id"] for p in produtos) + 1
-    else:
-        novo_id = 1
+    return "Produto não encontrado"
+
+
+def adicionar_produto(
+    nome,
+    categoria,
+    preco,
+    stock,
+    sabores,
+    tamanhos,
+    cores,
+    intolerancias
+):
+    if preco <= 0:
+        return "Preço inválido"
+
+    if stock < 0:
+        return "Stock inválido"
+
+    novo_id = max((p["id"] for p in produtos), default=0) + 1
 
     novo_produto = {
         "id": novo_id,
@@ -56,6 +73,7 @@ def adicionar_produto(nome, categoria, preco, stock, sabores, tamanhos, cores, i
     produtos.append(novo_produto)
     return f"Produto {nome} adicionado com sucesso!"
 
+
 def remover_produto(id_produto):
     for produto in produtos:
         if produto["id"] == id_produto:
@@ -64,8 +82,8 @@ def remover_produto(id_produto):
 
     return "Produto não encontrado."
 
-def alterar_precos(id_produto, novo_preco):
 
+def alterar_precos(id_produto, novo_preco):
     if novo_preco <= 0:
         return "Preço inválido"
 
@@ -75,22 +93,3 @@ def alterar_precos(id_produto, novo_preco):
             return f'Preço do produto "{produto["nome"]}" atualizado para €{novo_preco}'
 
     return "Produto não encontrado"
-=======
-from produtos import produtos
-from encomendas import encomendas
-def ordenar_por_data ()
-    return sorted(key=lamba, e: "data_desejada")
-
-def mostrar_produtos()
-    return produtos
-
-def alterar_estado_encomenda()
-
-def verificar_stock()
-
-def adicionar_produto()
-
-def remover_produto()
-
-def alterar_preços()
->>>>>>> 82347a8aec7238121546c9dedc74997402fe9a32
