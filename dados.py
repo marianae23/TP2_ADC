@@ -17,16 +17,16 @@ produtos = [
     {
         "id": 2,
         "nome": "Cupcake de Morango",
-        "categoria": "Cupcake",
+        "categoria": "cupcake",
         "preco": 3.5,
-        "stock": 10,
+        "stock": 20,
         "disponivel": True,
         "sabores": ["morango"],
         "tamanhos": ["unico"],
         "cores": ["rosa"],
         "intolerancias": [],
-        "novo": False,
         "promocao": None,
+        "novo": False,
         "avaliacoes": []
     },
     {
@@ -76,33 +76,78 @@ produtos = [
     }
 ]
 
+
 encomendas = [
     {
-    "id": 1,
-    "cliente_nome": "Maria",
-    "email": "maria@email.com",
-    "telefone": "912345678",
-    "tipo": "personalizada",
-    "produto_id": 1,
-    "personalizacao": {
-        "sabor": "baunilha",
-        "tamanho": "medio",
-        "cor": "rosa"
-    },
-    "quantidade": 1,
-    "metodo_envio": "entrega",
-    "morada": "Rua X",
-    "data_desejada": "2026-04-30",
-    "total": 30.0,
-    "estado": "Pendente",
-    "comentarios": ""
+        "id": 1,
+        "cliente_nome": "Maria",
+        "email": "maria@email.com",
+        "telefone": "912345678",
+        "tipo": "personalizada",
+        "produto_id": 1,
+        "personalizacao": {
+            "sabor": "baunilha",
+            "tamanho": "medio",
+            "cor": "rosa"
+        },
+        "quantidade": 1,
+        "metodo_envio": "entrega",
+        "forma_pagamento": "MB WAY",
+        "morada": "Rua X",
+        "data_desejada": "2026-04-30",
+        "total": 30.0,
+        "estado": "Pendente",
+        "comentarios": ""
     }
 ]
+
+
 formas_pagamento = [
     "MB WAY",
     "Cartão de crédito",
     "Cartão de débito",
     "PayPal",
     "Transferência bancária",
-    "Pagamento na entrega"
+    "Pagamento na entrega",
+    "Multibanco",
+    "Dinheiro",
+    "Cartão"
 ]
+
+
+metodos_envio = [
+    "Correio",
+    "Entrega",
+    "Levantamento",
+    "recolha"
+]
+
+
+estados_encomenda = [
+    "Pendente",
+    "Em preparação",
+    "Pronto para recolha",
+    "Enviado",
+    "Entregue",
+    "Cancelada"
+]
+
+
+datas_bloqueadas = []
+
+stock_maximo_mensal = {
+    "limite": 50
+}
+
+lista_compras = [
+    "Farinha",
+    "Açúcar",
+    "Ovos",
+    "Chocolate"
+]
+
+rede_social = {
+    "instagram": "https://instagram.com/doceria"
+}
+
+usuarios = []

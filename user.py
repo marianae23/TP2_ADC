@@ -1,14 +1,17 @@
-from dados import encomendas, produtos
+from dados import encomendas, produtos, formas_pagamento, metodos_envio
 from admin import *
+
+
 def adicionar_comentario_encomenda(id_encomenda, comentario):
     for encomenda in encomendas:
         if encomenda["id"] == id_encomenda:
             encomenda["comentarios"] = comentario
             return "Comentário adicionado com sucesso!"
 
-    return "encomenda não encontrada"
+    return "Encomenda não encontrada"
 
-def fazer_pedido(cliente_nome, email, telefone, produto_id, quantidade, metodo_envio, morada, data_desejada, comentario):
+
+def fazer_pedido(cliente_nome, email, telefone, produto_id, quantidade, metodo_envio, morada, data_desejada, comentario, forma_pagamento):
     produto_escolhido = None
 
     for produto in produtos:
@@ -42,7 +45,8 @@ def fazer_pedido(cliente_nome, email, telefone, produto_id, quantidade, metodo_e
         "data_desejada": data_desejada,
         "total": total,
         "estado": "Pendente",
-        "comentarios": comentario
+        "comentarios": comentario,
+        "forma_pagamento": forma_pagamento
     }
 
     encomendas.append(nova_encomenda)
@@ -51,44 +55,4 @@ def fazer_pedido(cliente_nome, email, telefone, produto_id, quantidade, metodo_e
     if produto_escolhido["stock"] == 0:
         produto_escolhido["disponivel"] = False
 
-    return f'Pedido criado com sucesso! Total: €{total}'
-
-while True:
-    print("\nMENU DE USUARIO")
-    print("1 - Ver produtos")
-    print("2 - Fazer comentário na encomenda")
-    print("3 - Fazer uma encomenda")
-    print("0 - Sair")
-
-    opcao = input("Escolhe: ")
-
-    if opcao == "1":
-        print(mostrar_produtos())
-
-    elif opcao == "2":
-        id_enc = int(input("ID da encomenda: "))
-        comentario = input("Comentário: ")
-        print(adicionar_comentario_encomenda(id_enc, comentario))
-
-    elif opcao == "3":
-        nome = input("Nome: ")
-        email = input("Email: ")
-        telefone = input("Telefone: ")
-        produto_id = int(input("ID do produto: "))
-        quantidade = int(input("Quantidade: "))
-        metodo_envio = input("Método de envio: ")
-        morada = input("Morada: ")
-        data = input("Data desejada: ")
-        comentario = input("Comentário/personalização: ")
-        print(fazer_pedido(nome, email, telefone, produto_id, quantidade, metodo_envio, morada, data, comentario))
-
-    elif opcao == "0":
-        break
-
-def adicionar_comentario_encomenda(id_encomenda, comentario):
-    for encomenda in encomendas:
-        if encomenda["id"] == id_encomenda:
-            encomenda["comentarios"] = comentario
-            return "Comentário adicionado com sucesso!"
-
-    return "Encomenda não encontrada"
+    return f"Pedido criado com sucesso! Total: €{total}"
