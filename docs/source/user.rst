@@ -25,3 +25,7 @@ Produtos
 ========
 
 - listar produtos disponíveis para compra
+.. automodule:: user
+   :members:
+   :undoc-members:
+   :show-inheritance:

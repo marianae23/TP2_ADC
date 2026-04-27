@@ -22,6 +22,7 @@ ESTADOS_VALIDOS = [
 def ordenar_por_data():
     """
     Ordena as encomendas pela data de entrega desejada
+    
     :return: Lista de encomendas ordenadas por data
     """
     return sorted(encomendas, key=lambda e: e["data_desejada"])
@@ -30,6 +31,7 @@ def ordenar_por_data():
 def mostrar_produtos():
     """
     Retorna a lista de todos produtos
+
     :return: lista de todos produtos
     """
     return produtos
@@ -38,6 +40,7 @@ def mostrar_produtos():
 def mostrar_produtos_disponiveis():
     """
     Mostra a lista dos produtos que estão disponiveis para venda
+
     :return: lista de produtos disponiveis
     """
     return [
@@ -48,7 +51,8 @@ def mostrar_produtos_disponiveis():
 
 def alterar_estado_encomenda(id_encomenda, novo_estado):
     """
-    Altera o estado de uma encomenda.
+    Altera o estado de uma encomenda
+
     :param id_encomenda: ID da encomenda
     :param novo_estado: Novo estado a atribuir
     :return: Mensagem de sucesso ou erro
@@ -66,7 +70,8 @@ def alterar_estado_encomenda(id_encomenda, novo_estado):
 
 def verificar_stock(id_produto):
     """
-    Verifica o stock de um produto.
+    Verifica o stock de um produto
+
     :param id_produto: ID do produto
     :return: Informação sobre disponibilidade
     """
@@ -93,7 +98,7 @@ def adicionar_produto(
     intolerancias
 ):
     """
-    Adiciona um novo produto ao sistema.
+    Adiciona um novo produto ao sistema
 
     :param nome: Nome do produto
     :param categoria: Categoria do produto
@@ -144,7 +149,8 @@ def remover_produto(id_produto):
 
 def alterar_precos(id_produto, novo_preco):
     """
-    Altera o preço de um produto.
+    Altera o preço de um produto
+
     :param id_produto: ID do produto
     :param novo_preco: Novo preço a aplicar
     :return: Mensagem de sucesso ou erro
@@ -166,7 +172,7 @@ def mostrar_metodos_pagamento():
 
 def adicionar_metodo_pagamento(novo_metodo):
     """
-    Adiciona um novo método de pagamento.
+    Adiciona um novo método de pagamento
 
     :param novo_metodo: Método a adicionar
     :return: Mensagem de confirmação
@@ -201,7 +207,8 @@ def editar_stock(id_produto, novo_stock):
 
 def adicionar_promocao(id_produto, desconto, data_inicio, data_fim):
     """
-    Adiciona uma promoção a um produto.
+    Adiciona uma promoção a um produto
+
     :param id_produto: ID do produto
     :param desconto: Percentagem de desconto
     :param data_inicio: Data de início da promoção
@@ -239,6 +246,7 @@ def listar_produtos_novos():
 def listar_produtos_em_promocao():
     """
     Lista os produtos na atual promoção
+
     :return: os produtos que estiverem participando de alguma promoção atualmente
     """
     return [
@@ -250,6 +258,7 @@ def listar_produtos_em_promocao():
 def ver_checkout_encomenda(id_encomenda):
     """
     Mostra os detalhes do checkout de uma encomenda.
+
     :param id_encomenda: ID da encomenda
     :return: Dados do checkout ou erro
     """
@@ -283,6 +292,7 @@ def historico_compras_cliente(email):
 def bloquear_data(data):
     """
     Bloqueia uma data em que encomendas não podem ser entregues
+
     :param data: Data a bloquear
     :return: Mensagem de confirmação
     """
@@ -316,6 +326,7 @@ def definir_stock_maximo_mensal(limite):
 def contar_encomendas_mes(ano_mes):
     """
     Conta a quantidade de produtos encomendados num mês.
+
     :param ano_mes: Ano e mês (YYYY-MM)
     :return: Total de produtos encomendados
     """
@@ -331,6 +342,7 @@ def contar_encomendas_mes(ano_mes):
 def verificar_limite_mensal(ano_mes):
     """
     Verifica se o limite mensal de encomendas foi atingido
+
     :param ano_mes: Ano e mês (YYYY-MM)
     :return: Informação sobre disponibilidade
     """
@@ -346,6 +358,7 @@ def verificar_limite_mensal(ano_mes):
 def adicionar_ingrediente(nome):
     """
     Adiciona um ingrediente a lista de compras
+
     :param nome: Nome do ingrediente
     :return: Mensagem de confirmação ou erro
     """

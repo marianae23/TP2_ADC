@@ -5,6 +5,7 @@ from encomendas import criar_encomenda
 def adicionar_comentario_encomenda(id_encomenda, comentario):
     """
     Adiciona um comentário a uma encomenda existente
+
     :param id_encomenda: ID da encomenda
     :param comentario: Comentário ou observação do cliente
     :return: Mensagem de confirmação ou erro
@@ -31,6 +32,7 @@ def fazer_pedido(
 ):
     """
     Cliente cria uma nova encomeda
+
     :param cliente_nome: Nome do cliente
     :param email: Email do cliente
     :param telefone: Número de telefone do cliente
@@ -68,6 +70,7 @@ def fazer_pedido(
 def listar_pedidos_cliente(email):
     """
     Lista as encomendas feitas por um cliente com o mesmo email
+
     :param email: Email do cliente
     :return: Lista de encomendas associadas ao email
     """
@@ -80,6 +83,7 @@ def listar_pedidos_cliente(email):
 def ver_estado_pedido(id_encomenda):
     """
     Consulta o estado atual de uma encomenda
+    
     :param id_encomenda: ID da encomenda
     :return: Estado da encomenda ou mensagem de erro
     """
@@ -93,6 +97,7 @@ def ver_estado_pedido(id_encomenda):
 def listar_produtos_cliente():
     """
     Lista os produtos disponíveis para o cliente
+
     :return: Lista de produtos disponíveis e com stock
     """
     return [
